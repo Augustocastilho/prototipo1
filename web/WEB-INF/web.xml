@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <param-name>user_bd</param-name>
+        <param-value>Augusto</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pw_bd</param-name>
+        <param-value>123</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>DataHora</servlet-name>
+        <servlet-class>DataHora</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Valida</servlet-name>
+        <servlet-class>Valida</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ErroJava</servlet-name>
+        <servlet-class>ErroJava</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DataHora</servlet-name>
+        <url-pattern>/DataHora</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Valida</servlet-name>
+        <url-pattern>/Valida</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ErroJava</servlet-name>
+        <url-pattern>/ErroJava</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/ErroHtml.html</location>
+    </error-page>
+</web-app>
