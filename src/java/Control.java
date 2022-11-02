@@ -61,6 +61,7 @@ public class Control extends HttpServlet {
                     session.setAttribute("logado", true);
                     logado = true;
                     System.out.println("LINHA 62: " + logado);
+                    session.setAttribute("nome", nome);
                 } else {
                     session.setAttribute("msg", "Login inválido!");
                 }
@@ -70,9 +71,9 @@ public class Control extends HttpServlet {
             }
         }
         if (logado) {
-            response.sendRedirect("menu.html");
+            response.sendRedirect("menu.jsp");
         } else {
-            response.sendRedirect("index.html");
+            response.sendRedirect("index.jsp");
         }
     }
 
