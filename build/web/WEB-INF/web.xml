@@ -9,24 +9,24 @@
         <param-value>123</param-value>
     </context-param>
     <servlet>
-        <servlet-name>DataHora</servlet-name>
-        <servlet-class>DataHora</servlet-class>
+        <servlet-name>Menu</servlet-name>
+        <servlet-class>Menu</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Valida</servlet-name>
-        <servlet-class>Valida</servlet-class>
+        <servlet-name>Control</servlet-name>
+        <servlet-class>Control</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ErroJava</servlet-name>
         <servlet-class>ErroJava</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>DataHora</servlet-name>
-        <url-pattern>/DataHora</url-pattern>
+        <servlet-name>Menu</servlet-name>
+        <url-pattern>/Menu</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Valida</servlet-name>
-        <url-pattern>/Valida</url-pattern>
+        <servlet-name>Control</servlet-name>
+        <url-pattern>/Control</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ErroJava</servlet-name>
@@ -34,7 +34,7 @@
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            10
         </session-timeout>
     </session-config>
     <error-page>

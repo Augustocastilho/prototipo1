@@ -4,7 +4,6 @@
  */
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,12 +13,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Augusto
  */
-public class Valida extends HttpServlet {
+public class Control extends HttpServlet {
 
     private String user_bd;
     private String pw_bd;
@@ -32,11 +32,51 @@ public class Valida extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+
+        // Pega a sessao
+        HttpSession session = request.getSession(true);
+        String code = request.getParameter("code");
+        boolean menu = false;
         
-        String user_a = request.getParameter("name");
-        String pw_a = request.getParameter("password");
-        
+        if (code != null && code.equals("sair")) {
+            session.setAttribute("logado", false);
+        } else if (code != null && code.equals("menu")) {
+            menu = true;
+        }
+        boolean logado = false;
+        Object tmp = session.getAttribute("logado");
+        if (tmp != null && (boolean) tmp) {
+            logado = true;
+        }
+
+        String nome = request.getParameter("nome");
+        String senha = request.getParameter("senha");
+
+        if (logado == false) {
+            System.out.println("LINHA 56: " + logado);
+            System.out.println("NOME " + nome);
+            if (nome != null || menu) {
+                // quer fazer login
+                if (validaLogin(nome, senha)) {
+                    session.setAttribute("logado", true);
+                    logado = true;
+                    System.out.println("LINHA 62: " + logado);
+                } else {
+                    session.setAttribute("msg", "Login inválido!");
+                }
+            } else {
+                session.setAttribute("msg", "Sessão expirou!!");
+                // expirou a sessao
+            }
+        }
+        if (logado) {
+            response.sendRedirect("menu.html");
+        } else {
+            response.sendRedirect("index.html");
+        }
+    }
+
+    public boolean validaLogin(String _nome, String _senha) throws ServletException {
         // Pega senha do banco de dados;
         boolean result = false;
         String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
@@ -55,7 +95,7 @@ public class Valida extends HttpServlet {
             stmt = conn.createStatement();
             String sql;
             sql = "SELECT nome, senha FROM USUARIO where upper(nome) = '"
-                    + user_a.toUpperCase() + "' and senha='" + pw_a + "'";
+                    + _nome.toUpperCase() + "' and senha='" + _senha + "'";
             ResultSet rs = stmt.executeQuery(sql);
             // Extract data from result set
             if (rs.next()) {
@@ -91,25 +131,8 @@ public class Valida extends HttpServlet {
                 throw new ServletException(e);
             }//end finally try
         } //end try    
-        if (result) {
-//            response.sendRedirect("index.html");
-            request.getRequestDispatcher("DataHora").forward(request, response);
-        } else {
-            try ( PrintWriter out = response.getWriter()) {
-                out.println("<!DOCTYPE html>");
-                out.println("<html>");
-                out.println("<head>");
-                out.println("<title>Servlet Valida</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("<h1>Usuário ou senha inválido</h1>");
-                out.println("<ul><li><a href='index.html'>Voltar</li></ul>");
-                out.println("</body>");
-                out.println("</html>");
-            }
-        }
+        return result;
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
