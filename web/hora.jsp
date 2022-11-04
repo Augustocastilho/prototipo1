@@ -21,7 +21,7 @@
                 String data = new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date());
                 String hora = new SimpleDateFormat("HH:mm:ss").format(new java.util.Date());
             %>
-            <div class="dataHora">
+            <div>
                 <h1><%= data%></h1>
                 <p class="relogio"><%= hora%></p>
             </div>
