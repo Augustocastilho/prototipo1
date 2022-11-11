@@ -14,11 +14,15 @@
     </head>
     <body>
         <div>
+            <div class="titulo">
+                <p>UNIVERSIDADE FEDERAL DE JUIZ DE FORA</p>
+            </div>
             <%
                 if (session.getAttribute("msg") != null) {
             %>
             <p><%= session.getAttribute("msg")%></p>
             <% }%>
+            
             <p>Digite seu primeiro nome e sua senha, depois aperte o botao</p>
             <form method="post" action = "Control">
                 <input type = "text" name = "nome">

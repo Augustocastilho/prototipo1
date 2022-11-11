@@ -24,3 +24,9 @@ h1, p, a {
     height: 80%;
     font-size: 300px;
 }
+
+.titulo{
+    align-items: center;
+    text-align: center;
+    font-size: 30px;
+}

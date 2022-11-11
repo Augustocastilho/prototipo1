@@ -36,12 +36,11 @@ public class Control extends HttpServlet {
         // Pega a sessao
         HttpSession session = request.getSession(true);
         String code = request.getParameter("code");
-        boolean menu = false;
-        
+
         if (code != null && code.equals("sair")) {
-            session.setAttribute("logado", false);
-        } else if (code != null && code.equals("menu")) {
-            menu = true;
+            session.invalidate();
+            response.sendRedirect("index.jsp");
+            return;
         }
         boolean logado = false;
         Object tmp = session.getAttribute("logado");
@@ -53,14 +52,11 @@ public class Control extends HttpServlet {
         String senha = request.getParameter("senha");
 
         if (logado == false) {
-            System.out.println("LINHA 56: " + logado);
-            System.out.println("NOME " + nome);
-            if (nome != null || menu) {
+            if (nome != null) {
                 // quer fazer login
                 if (validaLogin(nome, senha)) {
                     session.setAttribute("logado", true);
                     logado = true;
-                    System.out.println("LINHA 62: " + logado);
                     session.setAttribute("nome", nome);
                 } else {
                     session.setAttribute("msg", "Login inválido!");
@@ -134,6 +130,7 @@ public class Control extends HttpServlet {
         } //end try    
         return result;
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -13,6 +13,8 @@
         <link href="css/styles.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <a href='Control?code=menu'>Voltar</a>
+        <h1>Olá <%= session.getAttribute("nome")%>, seja bem vindo!
+        </h1>
+        <a href='Control'>Voltar</a>
     </body>
 </html>

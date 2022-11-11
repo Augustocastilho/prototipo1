@@ -18,9 +18,6 @@
             Object a = session.getAttribute("logado");
             if (a.equals(true)) {
         %>
-        <h1>Olá 
-            <%= session.getAttribute("nome")%>
-        </h1>
         <a href='welcome.jsp'>Welcome</a>
         <br/>
         <a href='hora.jsp'>Hora</a>
