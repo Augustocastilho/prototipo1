@@ -15,6 +15,6 @@
     <body>
         <h1>Olá <%= session.getAttribute("nome")%>, seja bem vindo!
         </h1>
-        <a href='Control'>Voltar</a>
+        <a href='Control?code=menu'>Voltar</a>
     </body>
 </html>

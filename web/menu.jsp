@@ -18,9 +18,9 @@
             Object a = session.getAttribute("logado");
             if (a.equals(true)) {
         %>
-        <a href='welcome.jsp'>Welcome</a>
+        <a href='Control?code=welcome'>Welcome</a>
         <br/>
-        <a href='hora.jsp'>Hora</a>
+        <a href='Control?code=hora'>Hora</a>
         <br/>
         <a href='google.html'>Erro html</a>
         <br/>

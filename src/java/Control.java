@@ -21,15 +21,6 @@ import javax.servlet.http.HttpSession;
  */
 public class Control extends HttpServlet {
 
-    private String user_bd;
-    private String pw_bd;
-
-    @Override
-    public void init() {
-        user_bd = getServletContext().getInitParameter("user_bd");
-        pw_bd = getServletContext().getInitParameter("pw_bd");
-    }
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -47,88 +38,30 @@ public class Control extends HttpServlet {
         if (tmp != null && (boolean) tmp) {
             logado = true;
         }
+        session.setAttribute("logado", logado);
 
-        String nome = request.getParameter("nome");
-        String senha = request.getParameter("senha");
-
-        if (logado == false) {
-            if (nome != null) {
-                // quer fazer login
-                if (validaLogin(nome, senha)) {
-                    session.setAttribute("logado", true);
-                    logado = true;
-                    session.setAttribute("nome", nome);
-                } else {
-                    session.setAttribute("msg", "Login inválido!");
-                }
-            } else {
-                session.setAttribute("msg", "Sessão expirou!!");
-                // expirou a sessao
-            }
-        }
-        if (logado) {
+        if (code != null && code.equals("menu")) {
             response.sendRedirect("menu.jsp");
-        } else {
-            response.sendRedirect("index.jsp");
+            return;
         }
-    }
+        if (code != null && code.equals("welcome")) {
+            response.sendRedirect("welcome.jsp");
+            return;
+        }
+        if (code != null && code.equals("hora")) {
+            response.sendRedirect("hora.jsp");
+            return;
+        }
+        if (code != null && code.equals("index")) {
+            response.sendRedirect("index.jsp");
+            return;
+        }
 
-    public boolean validaLogin(String _nome, String _senha) throws ServletException {
-        // Pega senha do banco de dados;
-        boolean result = false;
-        String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
-        String DB_URL = "jdbc:derby://localhost:1527/lpsw";
-        //  Database credentials
-        Connection conn = null;
-        Statement stmt = null;
-        String resp = "EXECUTOU";
-        // Set response content type
-        try {
-            // Register JDBC driver
-            Class.forName(JDBC_DRIVER);
-            // Open a connection
-            conn = DriverManager.getConnection(DB_URL, user_bd, pw_bd);
-            // Execute SQL query
-            stmt = conn.createStatement();
-            String sql;
-            sql = "SELECT nome, senha FROM USUARIO where upper(nome) = '"
-                    + _nome.toUpperCase() + "' and senha='" + _senha + "'";
-            ResultSet rs = stmt.executeQuery(sql);
-            // Extract data from result set
-            if (rs.next()) {
-                result = true;
-            }
-            rs.close();
-            stmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            //Handle errors for JDBC
-            //throw new ServletException(e);
-            resp = e.getMessage();
-            throw new ServletException(e);
-        } catch (Exception e) {
-            //Handle errors for Class.forName
-            //throw new ServletException(e);
-            resp = e.getMessage();
-            throw new ServletException(e);
-        } finally {
-            //finally block used to close resources
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                throw new ServletException(e);
-            }// nothing we can do
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                throw new ServletException(e);
-            }//end finally try
-        } //end try    
-        return result;
+        session.setAttribute("nome", request.getParameter("nome"));
+        session.setAttribute("senha", request.getParameter("senha"));
+
+        response.sendRedirect("Login");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
