@@ -30,6 +30,9 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
+    <listener>
+        <listener-class>Eventos.UserCounter</listener-class>
+    </listener>
     <servlet>
         <servlet-name>Control</servlet-name>
         <servlet-class>Control</servlet-class>

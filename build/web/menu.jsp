@@ -4,6 +4,7 @@
     Author     : Augusto
 --%>
 
+<%@page import="Eventos.UserCounter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -27,6 +28,8 @@
         <a href='ErroJava'>Erro Java</a>
         <br/>
         <a href='Control?code=sair'>Sair</a>
+        <br/>
+        <p>Número de usuário logados: <%=UserCounter.getCount()%></p>
         <br/>
         <%
         } else {

@@ -4,7 +4,13 @@
     Author     : Augusto
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Eventos.UserCounter"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>]
+
+<%
+    String attribute = (String)session.getAttribute("msg");
+    session.invalidate();
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,9 +24,9 @@
                 <p>UNIVERSIDADE FEDERAL DE JUIZ DE FORA</p>
             </div>
             <%
-                if (session.getAttribute("msg") != null) {
+                if (attribute != null) {
             %>
-            <p><%= session.getAttribute("msg")%></p>
+            <p><%= attribute%></p>
             <% }%>
             
             <p>Digite seu primeiro nome e sua senha, depois aperte o botao</p>
