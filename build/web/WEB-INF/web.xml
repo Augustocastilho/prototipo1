@@ -8,10 +8,31 @@
         <param-name>pw_bd</param-name>
         <param-value>123</param-value>
     </context-param>
-    <servlet>
-        <servlet-name>Menu</servlet-name>
-        <servlet-class>Menu</servlet-class>
-    </servlet>
+    <filter>
+        <filter-name>Filtro</filter-name>
+        <filter-class>Filtro</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Filtro</filter-name>
+        <url-pattern>/hora.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Filtro</filter-name>
+        <url-pattern>/welcome.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>Filtro</filter-name>
+        <url-pattern>/menu.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <listener>
+        <listener-class>Eventos.UserCounter</listener-class>
+    </listener>
     <servlet>
         <servlet-name>Control</servlet-name>
         <servlet-class>Control</servlet-class>
@@ -20,10 +41,10 @@
         <servlet-name>ErroJava</servlet-name>
         <servlet-class>ErroJava</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Menu</servlet-name>
-        <url-pattern>/Menu</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>Login</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
         <url-pattern>/Control</url-pattern>
@@ -31,6 +52,10 @@
     <servlet-mapping>
         <servlet-name>ErroJava</servlet-name>
         <url-pattern>/ErroJava</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

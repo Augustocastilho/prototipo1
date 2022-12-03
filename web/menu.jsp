@@ -4,6 +4,7 @@
     Author     : Augusto
 --%>
 
+<%@page import="Eventos.UserCounter"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,15 +19,17 @@
             Object a = session.getAttribute("logado");
             if (a.equals(true)) {
         %>
-        <a href='welcome.jsp'>Welcome</a>
+        <a href='Control?code=welcome'>Welcome</a>
         <br/>
-        <a href='hora.jsp'>Hora</a>
+        <a href='Control?code=hora'>Hora</a>
         <br/>
         <a href='google.html'>Erro html</a>
         <br/>
         <a href='ErroJava'>Erro Java</a>
         <br/>
         <a href='Control?code=sair'>Sair</a>
+        <br/>
+        <p>Número de usuário logados: <%=UserCounter.getCount()%></p>
         <br/>
         <%
         } else {
