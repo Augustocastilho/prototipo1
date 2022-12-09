@@ -52,6 +52,10 @@ public class Control extends HttpServlet {
             response.sendRedirect("hora.jsp");
             return;
         }
+        if (code != null && code.equals("usuarios")) {
+            response.sendRedirect("usuarios.jsp");
+            return;
+        }
         if (code != null && code.equals("index")) {
             response.sendRedirect("index.jsp");
             return;
