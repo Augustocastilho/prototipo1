@@ -29,7 +29,7 @@
         <div class="m-5">
             <%
                 Object a = session.getAttribute("logado");
-                if (a.equals(true)) {
+                if (a != null && a.equals(true)) {
             %>
             <a href='Control?code=welcome'>Welcome</a>
             <br/>

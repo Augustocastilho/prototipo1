@@ -30,6 +30,12 @@
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>Filtro</filter-name>
+        <url-pattern>/usuarios.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
     <listener>
         <listener-class>Eventos.UserCounter</listener-class>
     </listener>
